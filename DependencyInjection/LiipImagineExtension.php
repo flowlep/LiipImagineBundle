@@ -39,12 +39,20 @@ class LiipImagineExtension extends Extension
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getConfiguration(array $config, ContainerBuilder $container)
+    {
+        return new Configuration($this->resolversFactories, $this->loadersFactories);
+    }
+
+    /**
      * @see Symfony\Component\DependencyInjection\Extension.ExtensionInterface::load()
      */
     public function load(array $configs, ContainerBuilder $container)
     {
         $config = $this->processConfiguration(
-            new Configuration($this->resolversFactories, $this->loadersFactories),
+            $this->getConfiguration($configs, $container),
             $configs
         );
 
@@ -62,9 +70,13 @@ class LiipImagineExtension extends Extension
         }
 
         $container->setParameter('liip_imagine.cache.resolver.default', $config['cache']);
+
         $container->setParameter('liip_imagine.resolvers', $config['resolvers']);
+
         $container->setParameter('liip_imagine.filter_sets', $config['filter_sets']);
+
         $container->setParameter('liip_imagine.binary.loader.default', $config['data_loader']);
+
         $container->setParameter('liip_imagine.controller.filter_action', $config['controller']['filter_action']);
         $container->setParameter('liip_imagine.controller.filter_runtime_action', $config['controller']['filter_runtime_action']);
 

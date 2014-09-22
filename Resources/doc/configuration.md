@@ -8,14 +8,14 @@ liip_imagine:
     resolvers:
         default:
             web_path:
-              web_root: ~ # %kernel.root_dir%../web
+              web_root: ~ # %kernel.root_dir%/../web
               cache_prefix: ~ # media/cache
 
 
     loaders:
         default:
             filesystem:
-                data_root: ~  # %kernel.root_dir%../web/
+                data_root: ~  # %kernel.root_dir%/../web/
 
     driver:               gd
     cache:                default
@@ -62,8 +62,6 @@ There are several configuration options available:
  - `driver` - one of the three drivers: `gd`, `imagick`, `gmagick`
 
     default: `gd`
-
- - `formats` - optional list of image formats to which images may be converted to.
 
  - `filter_sets` - specify the filter sets that you want to define and use
 
